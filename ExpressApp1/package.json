@@ -1,0 +1,32 @@
+{
+  "name": "express-app1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "ExpressApp1",
+  "author": {
+    "name": "Admin"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.0",
+    "debug": "^2.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.4.0",
+    "formidable": "^1.2.1",
+    "fs-extra": "^7.0.0",
+    "morgan": "^1.7.0",
+    "partials": "^0.1.0",
+    "path-to-regexp": "^2.2.1",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "^2.3.0",
+    "serve-index": "^1.9.1",
+    "serve-static": "^1.13.2"
+  },
+  "engines": {
+    "node": "~6.10.x"
+  }
+}

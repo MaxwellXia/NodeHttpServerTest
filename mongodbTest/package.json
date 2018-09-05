@@ -1,0 +1,9 @@
+{
+  "name": "mongodb-test",
+  "version": "0.0.0",
+  "description": "mongodbTest",
+  "main": "app.js",
+  "author": {
+    "name": "Admin"
+  }
+}
