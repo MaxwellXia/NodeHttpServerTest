@@ -93,9 +93,10 @@ var fs = require('fs');
 //    console.log("https listening on port: 443");
 //});
 
+console.log(__dirname)
 
-var privateKey = fs.readFileSync('F:/Coder/SSL/server.key');
-var certificate = fs.readFileSync('F:/Coder/SSL/server.crt');
+var privateKey = fs.readFileSync('SSL/server.key'); 
+var certificate = fs.readFileSync('SSL/server.crt');
 var credentials = { key: privateKey, cert: certificate };
 
 var httpServer = httpModule.createServer(app);
