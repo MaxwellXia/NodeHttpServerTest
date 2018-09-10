@@ -31,11 +31,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="Client\ClientGetFrame.js" />
+    <Compile Include="Client\ClientGetFrameList.js" />
+    <Compile Include="Client\ClientLogin.js" />
     <Compile Include="public\javascripts\bootstrap.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\jquery.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="routes\client.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\login.js">
       <SubType>Code</SubType>
@@ -61,6 +65,7 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Client\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
