@@ -33,7 +33,7 @@
     <Compile Include="app.js" />
     <Compile Include="Client\ClientGetFrame.js" />
     <Compile Include="Client\ClientGetFrameList.js" />
-    <Compile Include="Client\ClientLogin.js" />
+    <Compile Include="Client\ClientLoginLogout.js" />
     <Compile Include="public\javascripts\bootstrap.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\jquery.js">
