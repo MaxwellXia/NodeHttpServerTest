@@ -53,12 +53,9 @@ exports.Login = function (req, res)
 
 exports.Logout = function(req, res)
 {
-    for (var index = 0; index < onlineUserInfo.length; index++)
+    if (onlineUserInfo[req.body['SessionID']]['ip'] == req.ip)
     {
-        if (req.ip == onlineUserInfo[indx]["ip"])
-        {
-            onlineUserInfo.splice(index,1);
-        }
+        onlineUserInfo.splice(req.body['SessionID'], 1);
     }
 }
 
@@ -66,6 +63,12 @@ exports.Logout = function(req, res)
 exports.UpdateTime = function(index)
 {
     onlineUserInfo[index]['lastActivityTime'] = process.uptime();
+}
+
+
+exports.GetOnlineUserInfo = function (index, section)
+{
+    return onlineUserInfo[index][section]
 }
 
 

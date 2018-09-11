@@ -16,33 +16,42 @@ router.post('/', function (req, res) {
         return;
     }
 
-    switch (head)
+    if ('Login' != head && logManagement.GetOnlineUserInfo(req.body['SessionID'],'ip') != req.ip)
     {
-        case 'Login':
-            {
-                logManagement.Login(req,res);
-                break;
-            }
-        case 'Logout':
-            {
-                logManagement.l
-            }
-        case 'GetFrameList':
-            {
-                getFrameList.GetFrameList(req, res);
-                break;
-            }
-        case 'GetFrame':
-            {
-                getFrame.GetFrame(req, res);
-                break;
-            }
-        default:
-            {
-                req.writeHead(404);
-                req.end;
-                break;
-            }
+        //客户端身份校验失败
+    }
+    else
+    {
+        switch (head)
+        {
+            case 'Login':
+                {
+                    logManagement.Login(req, res);
+                    break;
+                }
+            case 'Logout':
+                {
+                    logManagement.Logout();
+                }
+            case 'GetFrameList':
+                {
+                    logManagement.UpdateTime(req.body['SessionID']);
+                    getFrameList.GetFrameList(req,res);
+                    break;
+                }
+            case 'GetFrame':
+                {
+                    logManagement.UpdateTime(req.body['SessionID']);
+                    getFrame.GetFrame(req, res);
+                    break;
+                }
+            default:
+                {
+                    req.writeHead(404);
+                    req.end;
+                    break;
+                }
+        }
     }
 })
 
