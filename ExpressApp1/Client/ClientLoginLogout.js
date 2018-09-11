@@ -1,10 +1,14 @@
 var fs = require("fs");
 var onlineUserInfo = new Array();
+var timeoutPeriod = 180;
+var refreshRate = 5000;
+var fileLoc = './Client/user.json';
+
+//Maintain online user queuesMaintain online user queues
+setInterval(MaintainingUserQueues, refreshRate);
 
 exports.Login = function (req, res)
 {
-    var fileLoc = './Client/user.json';
-
     fs.readFile(fileLoc, function (err,data)
     {
         if (err)
@@ -22,7 +26,7 @@ exports.Login = function (req, res)
                 {
                     loginState = true;
                     //To DO:
-                    onlineUserInfo.push({ "ip": req.ip, "index": index,"lastActivityTime":});
+                    onlineUserInfo.push({ "ip": req.ip, "index": index, "lastActivityTime": process.uptime()});
                     var post_data = { "Head": "ServerLogin", "State": loginState, "SessionID": index };
                     var content = JSON.stringify(post_data);
 
@@ -43,7 +47,6 @@ exports.Login = function (req, res)
                 res.end();
             }
         }
-
     });
 }
 
@@ -55,6 +58,24 @@ exports.Logout = function(req, res)
         if (req.ip == onlineUserInfo[indx]["ip"])
         {
             onlineUserInfo.splice(index,1);
+        }
+    }
+}
+
+
+exports.UpdateTime = function(index)
+{
+    onlineUserInfo[index]['lastActivityTime'] = process.uptime();
+}
+
+
+function MaintainingUserQueues()
+{
+    for (var index = 0; index < onlineUserInfo.length; index++)
+    {
+        if (process.uptime() - onlineUserInfo[index]['lastActivityTime'] > timeoutPeriod)
+        {
+            onlineUserInfo.splice(index, 1);
         }
     }
 }
