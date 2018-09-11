@@ -24,7 +24,7 @@ exports.GetFrameList = function (req, res)
 
                 if (null != source.search(target))
                 {
-                    fileList.push({ "FrameName": files[index], "URL": resource + files[index]});
+                    fileList.push({ "FrameName": files[index], "URL": loc + '\\' + files[index] });
                 }
             }
 
