@@ -97,9 +97,11 @@ var fs = require('fs');
 
 console.log(__dirname)
 
-var privateKey = fs.readFileSync('SSL/server.key'); 
-var certificate = fs.readFileSync('SSL/server.crt');
-var credentials = { key: privateKey, cert: certificate };
+//var privateKey = fs.readFileSync('SSL/server.key'); 
+//var certificate = fs.readFileSync('SSL/server.crt');
+var pxfFile = fs.readFileSync('SSL/server.pfx');
+var pwd = '123456';
+var credentials = { pfx: pxfFile, passphrase:pwd };
 
 var httpServer = httpModule.createServer(app);
 var httpsServer = httpsModule.createServer(credentials, app);
