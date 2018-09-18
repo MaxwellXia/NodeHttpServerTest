@@ -1,11 +1,11 @@
 var fs = require("fs");
 var onlineUserInfo = new Array();
-var timeoutPeriod = 180;
-var refreshRate = 5000;
+var timeoutPeriodSecond = 180;
+var refreshRateMs = 5000;
 var fileLoc = './Client/user.json';
 
-//Maintain online user queuesMaintain online user queues
-setInterval(MaintainingUserQueues, refreshRate);
+///Maintain online user queuesMaintain online user queues
+setInterval(MaintainingUserQueues, refreshRateMs);
 
 exports.Login = function (req, res)
 {
@@ -76,10 +76,9 @@ function MaintainingUserQueues()
 {
     for (var index = 0; index < onlineUserInfo.length; index++)
     {
-        if (process.uptime() - onlineUserInfo[index]['lastActivityTime'] > timeoutPeriod)
+        if (process.uptime() - onlineUserInfo[index]['lastActivityTime'] > timeoutPeriodSecond)
         {
             onlineUserInfo.splice(index, 1);
         }
     }
 }
-
