@@ -31,8 +31,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="Client\ClientGetFrame.js" />
-    <Compile Include="Client\ClientGetFrameList.js" />
+    <Compile Include="Client\ClientGetFile.js" />
+    <Compile Include="Client\ClientGetDeviceTable.js" />
     <Compile Include="Client\ClientLoginLogout.js" />
     <Compile Include="public\javascripts\bootstrap.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />

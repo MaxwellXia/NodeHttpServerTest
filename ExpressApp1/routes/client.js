@@ -1,8 +1,8 @@
 ﻿'use strict';
 var express = require('express');
 var logManagement = require('../Client/ClientLoginLogout');
-var getFrameList = require('../Client/ClientGetFrameList');
-var getFrame = require('../Client/ClientGetFrame');
+var getDeviceTable = require('../Client/ClientGetDeviceTable');
+var getFile = require('../Client/ClientGetFile');
 var router = express.Router();
 
 router.post('/', function (req, res) {
@@ -33,16 +33,16 @@ router.post('/', function (req, res) {
                 {
                     logManagement.Logout();
                 }
-            case 'GetFrameList':
+            case 'ClientGetFile':
                 {
                     logManagement.UpdateTime(req.body['SessionID']);
-                    getFrameList.GetFrameList(req,res);
+                    getFile.GetFrame(req, res);
                     break;
                 }
-            case 'GetFrame':
+            case 'ClientGetDeviceTable':
                 {
                     logManagement.UpdateTime(req.body['SessionID']);
-                    getFrame.GetFrame(req, res);
+                    getDeviceTable.GetDeviceTable(req,res);
                     break;
                 }
             default:
