@@ -36,7 +36,7 @@ router.post('/', function (req, res) {
             case 'ClientGetFile':
                 {
                     logManagement.UpdateTime(req.body['SessionID']);
-                    getFile.GetFrame(req, res);
+                    getFile.GetFile(req, res);
                     break;
                 }
             case 'ClientGetDeviceTable':
