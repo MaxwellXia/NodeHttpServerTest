@@ -2,6 +2,7 @@ var fs = require("fs");
 var onlineUserInfo = new Array();
 var timeoutPeriodSecond = 180;
 var refreshRateMs = 5000;
+var SessionID = Array();
 var fileLoc = './Client/user.json';
 
 ///Maintain online user queuesMaintain online user queues
@@ -26,8 +27,8 @@ exports.Login = function (req, res)
                 {
                     loginState = true;
                     //To DO:
-                    onlineUserInfo.push({ "ip": req.ip, "index": index, "lastActivityTime": process.uptime()});
-                    var post_data = { "Head": "ServerLogin", "State": loginState, "SessionID": index };
+                    onlineUserInfo.push({ "SessionID": req.ip + index.toString(), "lastActivityTime": process.uptime()});
+                    var post_data = { "Head": "ServerLogin", "State": loginState, "SessionID": req.ip + index.toString() };
                     var content = JSON.stringify(post_data);
 
                     res.writeHead(200, { "Content-Type": "application/json", 'Content-Length': content.length });
@@ -53,22 +54,32 @@ exports.Login = function (req, res)
 
 exports.Logout = function(req, res)
 {
-    if (onlineUserInfo[req.body['SessionID']]['ip'] == req.ip)
+    var index = this.GetOnlineUserIndex(req.body['SessionID']);
+    if (index)
     {
-        onlineUserInfo.splice(req.body['SessionID'], 1);
+        onlineUserInfo.splice(index, 1);
     }
 }
 
 
-exports.UpdateTime = function(index)
+exports.UpdateTime = function (sessionID)
 {
+    var index = this.GetOnlineUserIndex(sessionID);
     onlineUserInfo[index]['lastActivityTime'] = process.uptime();
 }
 
 
-exports.GetOnlineUserInfo = function (index, section)
+exports.GetOnlineUserIndex = function (sessionID)
 {
-    return onlineUserInfo[index][section]
+    for (var index = 0; index < onlineUserInfo.length; index++)
+    {
+        if (onlineUserInfo[index]["SessionID"] == sessionID)
+        {
+            return index;
+        }
+    }
+
+    return null;
 }
 
 

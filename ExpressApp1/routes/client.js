@@ -16,9 +16,11 @@ router.post('/', function (req, res) {
         return;
     }
 
-    if ('Login' != head && logManagement.GetOnlineUserInfo(req.body['SessionID'],'ip') != req.ip)
+    if ('Login' != head && logManagement.GetOnlineUserIndex(req.body['SessionID']))
     {
         //客户端身份校验失败
+        req.writeHead(403);
+        req.end;
     }
     else
     {
