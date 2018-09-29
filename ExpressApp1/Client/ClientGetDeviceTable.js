@@ -25,18 +25,19 @@ function GetStrLen(str)
     return realLength;
 }
 
+
 var fileList = new Array();
 function GetFileList(filePath)
 {
     var dir = fs.readdirSync(filePath);
     if (dir) {
         for (var index = 0; index < dir.length; index++) {
-            var fileinfo = fs.statSync(filePath + '\\' + dir[index]);
+            var fileinfo = fs.statSync(filePath + '/' + dir[index]);
             if (fileinfo.isFile()) {
-                fileList.push((filePath + '\\' + dir[index]).replace(baseAddr + '\\', ''));
+                fileList.push((filePath + '/' + dir[index]).replace(baseAddr + '/', ''));
             }
             else if (fileinfo.isDirectory()) {
-                GetFileList(filePath + '\\' + dir[index]);
+                GetFileList(filePath + '/' + dir[index]);
             }
         }
     }
@@ -106,7 +107,7 @@ exports.GetFrameList = function (req, res)
 
                 if (null != source.search(target))
                 {
-                    fileList.push({ "FrameName": files[index], "URL": loc + '\\' + files[index] });
+                    fileList.push({ "FrameName": files[index], "URL": loc + '/' + files[index] });
                 }
             }
 
@@ -128,7 +129,7 @@ exports.GetFrameList = function (req, res)
 
 exports.GetDeviceTable = function(req, res)
 {
-    if (!fs.existsSync(baseAddr + "//" + deviceTableName))
+    if (!fs.existsSync(baseAddr + "/" + deviceTableName))
     {
         ParsingFileTable();
     }
