@@ -113,15 +113,12 @@ exports.GetFrameList = function (req, res)
             if (0 != fileList.length)
             {
                 var content = JSON.stringify(fileList);
-
-
-
                 res.writeHead(200, { "Content-Type": "application/json", 'Content-Length': GetStrLen(content) });
-                
                 res.write(content);
                 res.end();
             }
-            else {
+            else
+            {
                 res.writeHead(500);
                 res.end();
             }
