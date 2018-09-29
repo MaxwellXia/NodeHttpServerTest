@@ -8,8 +8,8 @@ exports.GetFile = function (req, res)
     var fileStat = fs.stat(baseAddr + '/' + url,
         function (err, stats) {
             if (err) {
-                response.writeHead(404);
-                response.end();
+                res.writeHead(404);
+                res.end();
                 return null;
             }
             //TODO:Content-Type应该根据文件类型设置

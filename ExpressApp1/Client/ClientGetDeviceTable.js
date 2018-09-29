@@ -58,9 +58,27 @@ function ParsingFileTable()
         }
 
         var arry = fileList[index].split('\\');
-        
-        json.push({ "Name": arry[3], "Model": arry[0], "Voriart": arry[1], "Parm": arry[2], "Path": arry[0] + "/" + arry[1] + "/" + arry[2] + "/" + arry[3] });
-        
+
+        if (arry.length == 4)
+        {
+            json.push({ "Name": arry[3], "Model": arry[0], "Voriart": arry[1], "Parm": arry[2], "Path": arry[0] + "/" + arry[1] + "/" + arry[2] + "/" + arry[3] });
+        }
+        else
+        {
+            var path = "";
+            for (var i = 0; i < arry.length; i++)
+            {
+                if (i != arry.length - 1)
+                {
+                    path += arry[i] + '/'
+                }
+                else
+                {
+                    path += arry[i]
+                }
+            }
+            json.push({ "Name": arry[arry.length - 1], "Path": path });
+        }
     }
     fs.writeSync(fd, JSON.stringify(json,null,1));
     fs.closeSync(fd);
